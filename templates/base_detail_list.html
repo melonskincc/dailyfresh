@@ -1,0 +1,49 @@
+{# 详情页 列表页  #}
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% block body %}
+    <div class="navbar_con">
+		<div class="navbar clearfix">
+			<div class="subnav_con fl">
+				<h1>全部商品分类</h1>
+				<span></span>
+				<ul class="subnav">
+                    {% for type in types %}
+					<li><a href="{% url 'goods:list' type.id 1 %}" class="{{ type.logo }}">{{ type.name }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			<ul class="navlist fl">
+				<li><a href="">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="">手机生鲜</a></li>
+				<li class="interval">|</li>
+				<li><a href="">抽奖</a></li>
+			</ul>
+		</div>
+	</div>
+    {# 详情页 列表页主体内容块 #}
+    {% block main_content %}{% endblock main_content %}
+{% endblock body %}
+{% block bottomfiles %}
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script>
+        $('.add_goods').click(function () {
+            var sku_id=$(this).attr('sku_id'),
+                csrf_token=$('input[name="csrfmiddlewaretoken"]').val(),
+                num=1;
+            var content={'sku_id':sku_id,
+                'csrfmiddlewaretoken':csrf_token,
+                'num':num
+            };
+            $.post('/cart/add',content,function (data) {
+                if(data.res==5){  //添加成功
+                    alert(data.msg);
+                    $('#show_count').html(data.cart_count);
+                }else {
+                    alert(data.msg);
+                }
+            })
+        })
+    </script>
+{% endblock bottomfiles %}

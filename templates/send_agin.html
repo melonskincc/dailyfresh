@@ -1,0 +1,24 @@
+{% extends 'base_no_cart.html' %}
+{% block title %}
+天天生鲜-账户激活页面{% endblock %}
+{% block topfiles %}
+    <style>
+        .div{
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+<div class="div">
+<h1>天天生鲜账户激活：只有激活账户才能登陆到主页面进行账户操作</h1>
+    <form action="/user/send_agin" method="post">
+        {% csrf_token %}
+        {{ errmesg }}
+        为以下账户激活：<br/>
+        <input type="text" name="username" value="{{ username }}">
+        <input type="submit" value="激活">
+        <p>我们将会发送一封邮件到你注册时填写的邮箱地址，请到邮箱进行确认激活。</p>
+    </form>
+    </div>
+{% endblock %}
