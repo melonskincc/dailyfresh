@@ -5,7 +5,7 @@ celery==3.1.25
 celery-with-redis==3.0
 certifi==2018.1.18
 chardet==3.0.4
-Django==1.8.2
+Django==1.11.29
 django-celery==3.1.17
 django-debug-toolbar==1.9.1
 django-haystack==2.6.1
